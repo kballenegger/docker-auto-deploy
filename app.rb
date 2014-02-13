@@ -30,6 +30,7 @@ class AutoDeployController < Kenji::Controller
     mail = Mail.new do
       subject 'Quoth deploy...'
       to Conf['mailto']
+      from 'deploys@quothapp.com'
       body log
     end
     mail.delivery_method :smtp, Conf['smtp']
