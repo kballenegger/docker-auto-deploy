@@ -15,6 +15,11 @@ class AutoDeployController < Kenji::Controller
       kenji.respond(403, 'Bad authentication.')
     end
 
+    input = kenji.input_as_json
+    unless input['ref'] == 'refs/heads/master'
+      puts 'Push was not to master, nothing to do.'
+      kenji.respond(200, 'Nothing to do.')
+    end
 
     log = 'Deploy request authorized... processing.'
     log << "\n\n---\n\n"
