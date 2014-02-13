@@ -19,7 +19,7 @@ class AutoDeployController < Kenji::Controller
     log = 'Deploy request authorized... processing.'
     log << "\n\n---\n\n"
 
-    script = Conf['sript']
+    script = Conf['script']
 
     # restart app...
 
