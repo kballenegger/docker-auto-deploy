@@ -23,6 +23,7 @@ class AutoDeployController < Kenji::Controller
 
     # restart app...
 
+    # TODO: handle failures
     log << `#{script}`
     log << "\n\n."
 
@@ -33,5 +34,10 @@ class AutoDeployController < Kenji::Controller
     end
     mail.delivery_method :smtp, Conf['smtp']
     mail.deliver
+
+    {
+      status: 200,
+      message: 'Deploy successful.'
+    }
   end
 end
