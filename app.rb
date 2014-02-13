@@ -33,7 +33,8 @@ class AutoDeployController < Kenji::Controller
       from 'deploys@quothapp.com'
       body log
     end
-    mail.delivery_method :smtp, Conf['smtp']
+    smtp = Hash[Conf['smtp'].map {|k,v| [k.to_sym, v]}]
+    mail.delivery_method :smtp,  smtp
     mail.deliver
 
     {
