@@ -33,9 +33,15 @@ class AutoDeployController < Kenji::Controller
       from 'deploys@quothapp.com'
       body log
     end
-    smtp = Hash[Conf['smtp'].map {|k,v| [k.to_sym, v]}]
-    mail.delivery_method :smtp,  smtp
-    mail.deliver
+
+    begin
+      smtp = Hash[Conf['smtp'].map {|k,v| [k.to_sym, v]}]
+      mail.delivery_method :smtp,  smtp
+      mail.deliver
+    rescue
+      puts 'Error mailing log :\'('
+      puts log
+    end
 
     {
       status: 200,
